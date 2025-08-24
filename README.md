@@ -34,6 +34,37 @@ A simple To-Do task manager built with **Laravel 11**, **MySQL**, **Blade**, and
 
 1. **Clone the repository**
 
-```bash
-git clone https://github.com/<USERNAME>/<REPO>.git
-cd <REPO>
+'''bash
+git clone https://github.com/MRinuka/coveragex-tasks.git
+cd coveragex-tasks
+
+2. **Copy Environment File**
+
+'''bash
+cp .env.example .env
+
+3. **Start the containers**
+
+'''bash
+docker compose up -d
+
+4. **Install dependencies inside container**
+
+'''bash
+docker-compose exec app composer install
+docker-compose exec app php artisan key:generate
+docker-compose exec app php artisan migrate
+
+5. **Access the app**
+
+Enter URL http://localhost:8080/
+
+6. **Stop the app**
+
+'''bash
+docker composer down
+
+7. **To run the test framework**
+
+'''bash
+docker compose exec app php artisan test
