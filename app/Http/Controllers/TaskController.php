@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the incomplete tasks.
-     */
+    
     public function index()
     {
         $tasks = Task::where('is_completed', false)
@@ -20,9 +18,7 @@ class TaskController extends Controller
         return view('tasks.index', compact('tasks'));
     }
 
-    /**
-     * Store a newly created task in storage.
-     */
+    
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -37,13 +33,11 @@ class TaskController extends Controller
             ->with('success', 'Task created successfully!');
     }
 
-    /**
-     * Mark the specified task as done (deletes it for now).
-     */
+    
     public function markDone($id)
     {
         $task = Task::findOrFail($id);
-        $task->delete(); // Consider changing this to mark as completed instead
+        $task->delete(); 
 
         return response()->json([
             'message' => 'Task marked as done'

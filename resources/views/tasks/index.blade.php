@@ -3,7 +3,7 @@
 @section('content')
 <div class="min-h-screen flex items-center justify-center bg-white">
 
-    {{-- Background Container --}}
+
     <div class="bg-gray-100 bg-opacity-50 shadow-xl rounded-3xl p-8 max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-6">
         
         {{-- Task Form --}}
@@ -41,7 +41,7 @@
         </div>
 
         {{-- Task List --}}
-        <div class="bg-gray-50 p-6 rounded-2xl shadow-inner">
+        <div class="bg-white p-6 rounded-2xl shadow-inner">
             <h2 class="text-xl font-semibold mb-4">Latest Tasks</h2>
 
             <div class="space-y-4" id="task-list">
@@ -63,16 +63,7 @@
                                 class="peer sr-only"
                             >
                             <span class="w-6 h-6 flex items-center justify-center rounded-full border-2 border-green-600 transition peer-checked:bg-green-600 peer-checked:border-green-600">
-                                {{-- Checkmark --}}
-                                <svg 
-                                    class="w-4 h-4 text-white hidden peer-checked:block" 
-                                    fill="none" 
-                                    stroke="currentColor" 
-                                    stroke-width="2" 
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                </svg>
+                                
                             </span>
                         </label>
                     </div>

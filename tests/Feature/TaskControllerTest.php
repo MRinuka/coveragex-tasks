@@ -20,26 +20,56 @@ class TaskControllerTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee(Task::latest()->first()->title);
-        // Only 5 latest tasks should show
+        
         $tasks = Task::latest()->take(5)->get();
         foreach ($tasks as $task) {
             $response->assertSee($task->title);
         }
     }
 
+    
+
     /** @test */
-    public function it_can_create_a_task_via_post()
+    public function it_can_create_a_task_via_Add_Task_Button()
     {
         $response = $this->post('/tasks', [
             'title' => 'Feature Test Task',
             'description' => 'Testing post request',
         ]);
 
-        $response->assertRedirect(); // usually redirects back to tasks page
+        $response->assertRedirect(); 
         $this->assertDatabaseHas('tasks', [
             'title' => 'Feature Test Task'
         ]);
     }
+
+    /** @test */
+    public function it_can_create_a_task_with_description()
+    {
+        $response = $this->post('/tasks', [
+            'title' => 'Feature Test Task',
+            'description' => 'Feature description',
+        ]);
+
+        $response->assertRedirect(); 
+        $this->assertDatabaseHas('tasks', [
+            'title' => 'Feature Test Task',
+            'description' => 'Feature description',
+        ]);
+    }
+
+    /** @test */
+    public function it_requires_a_title_when_creating_task()
+    {
+        $response = $this->post('/tasks', [
+            'title' => '', 
+            'description' => '',
+        ]);
+
+        $response->assertSessionHasErrors('title');
+        $this->assertDatabaseCount('tasks', 0); 
+    }
+
 
     /** @test */
     public function it_can_mark_task_done()
@@ -47,8 +77,8 @@ class TaskControllerTest extends TestCase
         $task = Task::factory()->create();
 
         $response = $this->put("/tasks/{$task->id}/done");
-        $response->assertStatus(200);  // expect 200 now
-        $this->assertDatabaseMissing('tasks', ['id' => $task->id]); // task should be gone
+        $response->assertStatus(200);  
+        $this->assertDatabaseMissing('tasks', ['id' => $task->id]); 
 
     }
 
