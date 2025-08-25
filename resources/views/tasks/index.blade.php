@@ -76,7 +76,7 @@
     </div>
 </div>
 
-{{-- JavaScript --}}
+{{-- JS --}}
 <script>
     async function markDone(id) {
         const response = await fetch(`/tasks/${id}/done`, {
